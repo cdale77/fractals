@@ -1,0 +1,36 @@
+<html>
+  <canvas id="canvas" width="1600px" height="1600px"></canvas>
+  <script type="text/javascript">
+
+    var size = 400;
+
+    // set up the canvass with a border
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.rect(0, 0, size, size);
+    ctx.stroke();
+
+    drawFractal(size / 2, size, size / 2);
+
+    function drawFractal(start_x, start_y, length) {
+
+      ctx.beginPath();
+      ctx.moveTo(start_x, start_y);
+      ctx.lineTo(start_x, length);
+
+     // ctx.lineTo(start_x / 2, length / 2);
+
+      //move back to the junction
+      //ctx.moveTo(start_x, length);
+      //ctx.lineTo(start_x + start_x / 2, length / 2);
+
+      ctx.stroke();
+
+      if (length > 2) {
+        drawFractal(start_x / 2, length / 2, length / 2);
+       // drawFractal(start_x + start_x / 2, length / 2, length / 2);
+      }
+      
+    }
+  </script>
+</html>
