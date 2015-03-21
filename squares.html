@@ -1,0 +1,29 @@
+<html>
+  <canvas id="canvas" width="1600px" height="1600px"></canvas>
+  <script type="text/javascript">
+
+    var size = 400;
+
+    // set up the canvass with a border
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    drawFractal(0, size);
+
+    function drawFractal(offset, length) {
+
+      ctx.beginPath();
+      ctx.rect(offset, offset, length, length);
+      ctx.stroke();
+
+      var shift = length * .05;
+
+      offset = offset + shift;
+      length = length - shift * 2;
+
+      if (length > 4) {
+        drawFractal(offset, length);
+      }
+    }
+  </script>
+</html>
