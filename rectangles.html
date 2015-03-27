@@ -1,30 +1,27 @@
 <html>
   <canvas id="canvas" width="800px" height="800px"></canvas>
   <br>
-  <button id="drawButton" onclick="drawLineFractal(800)">Draw</button>
   <script type="text/javascript">
 
-    // set the size of the canvass
-    var size = 800;
 
-    // set up the canvass with a border
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-    ctx.rect(0, 0, size, size);
-    ctx.stroke();
-
-    //drawLineFractal(size);
+    function drawBorder(size) {
+      var ctx = getCanvass();
+      ctx.rect(0, 0, size, size);
+      ctx.stroke();
+    }
 
     function drawLineFractal(container_width) {
-      // clear the context
-      ctx.beginPath();
 
+      var ctx = getCanvass();
+
+      drawBorder(container_width);
+ 
       // move halfway to the edge
       var new_x = 0 + container_width / 2;
       ctx.moveTo(new_x, 0);
 
       // draw a line to the bottom
-      ctx.lineTo(new_x, size);
+      ctx.lineTo(new_x, container_width);
       ctx.stroke();
 
       var new_width = container_width / 2;

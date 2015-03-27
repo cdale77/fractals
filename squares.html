@@ -4,16 +4,18 @@
   <button id="drawButton" onclick="drawFractal(0, 800)">Draw</button>
   <script type="text/javascript">
 
-    var size = 800;
-
-    // set up the canvass with a border
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
+    function getCanvass() {
+      return document.getElementById("canvas").getContext("2d");
+    }
 
     function drawFractal(offset, length) {
 
-      ctx.beginPath();
+      var ctx = getCanvass();
+      var colors = ["#FF0000", "#66FF00", "#FFFF00", "#3300FF"]
+      var color = colors[Math.floor(Math.random()*colors.length)]
+
       ctx.rect(offset, offset, length, length);
+      ctx.strokeStyle = color;
       ctx.stroke();
 
       var shift = length * .05;

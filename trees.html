@@ -1,10 +1,11 @@
 <html>
   <canvas id="canvas" width="800px" height="800px"></canvas>
   <br>
-  <button id="drawButton" onclick="drawFractal(400, 800)">Draw</button>
+  <button id="drawButton" onclick="drawFractal(400, 800, 0)">Draw</button>
   <script type="text/javascript">
 
     var size = 800;
+    var colors = ["#FF0000", "#66FF00", "#FFFF00", "#3300FF"]
 
     // set up the canvass with a border
     var canvas = document.getElementById("canvas");
@@ -14,34 +15,48 @@
 
     //drawFractal(size / 2, size, size / 2);
 
-    function drawFractal(start_x, start_y) {
+    function drawFractal(start_x, start_y, left_corner_x) {
+      console.log("Drawing fractal at", start_x, ",", start_y);
+
+      var color = colors[Math.floor(Math.random()*colors.length)]
 
       ctx.beginPath();
 
+      // Move to the start
       ctx.moveTo(start_x, start_y);
-      console.log("move to:", start_x, start_y);
+      console.log("Moving to start:", start_x, start_y);
 
-      ctx.lineTo(start_x, start_y / 2);
-      console.log("line to:", start_x, start_y /2);
+      // Draw the trunk
+      var midpoint_x = start_x;
+      var midpoint_y = start_y / 2;
 
-      ctx.lineTo(start_x / 2, start_y / 4);
-      console.log("line to:", start_x / 2, start_y / 4);
+      ctx.lineTo(midpoint_x, midpoint_y);
+      console.log("Line to midpoint:", midpoint_x, midpoint_y);
 
-      //move back to the junction
-      ctx.moveTo(start_x, start_y / 2);
-      console.log("move to:", start_x, start_y / 2);
+      // Draw the left branch
+      //var left_x = start_x / 2;
+      var left_x = start_x - (start_x - left_corner_x)
+      var left_y = start_y /4;
+      ctx.lineTo(left_x, left_y);
+      console.log("Line to left branch:", left_x, left_y);
 
-      ctx.lineTo(start_x + start_x / 2, start_y / 4);
-      console.log("line to:", start_x + start_x / 2, start_y / 4)
+      // Move back to the junction
+      ctx.moveTo(midpoint_x, midpoint_y);
+      console.log("Back to the midpoint", midpoint_x, midpoint_y);
 
+      // Draw the right branch
+      var right_x = start_x + start_x / 2;
+      var right_y = start_y / 4;
+      ctx.lineTo(right_x, right_y);
+      console.log("Line to the left branch:", right_x, right_y)
+
+      ctx.strokeStyle = color;
       ctx.stroke();
 
-      if (start_y > 2) {
+      if (start_y > 8 && start_x < 801) {
         drawFractal(start_x / 2, start_y / 4);
         drawFractal(start_x + start_x / 2, start_y / 4);
-        console.log("recursing to:", start_x + start_x / 2, start_y / 4)
       }
-
     }
   </script>
 </html>
