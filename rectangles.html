@@ -1,7 +1,10 @@
 <html>
-  <canvas id="canvas" width="1600px" height="1600px"></canvas>
+  <canvas id="canvas" width="800px" height="800px"></canvas>
+  <br>
+  <button id="drawButton" onclick="drawLineFractal(800)">Draw</button>
   <script type="text/javascript">
 
+    // set the size of the canvass
     var size = 800;
 
     // set up the canvass with a border
@@ -10,12 +13,9 @@
     ctx.rect(0, 0, size, size);
     ctx.stroke();
 
-    var container_width = size;
-
-    drawLineFractal(size);
+    //drawLineFractal(size);
 
     function drawLineFractal(container_width) {
-
       // clear the context
       ctx.beginPath();
 

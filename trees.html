@@ -1,8 +1,10 @@
 <html>
-  <canvas id="canvas" width="1600px" height="1600px"></canvas>
+  <canvas id="canvas" width="800px" height="800px"></canvas>
+  <br>
+  <button id="drawButton" onclick="drawFractal(400, 800)">Draw</button>
   <script type="text/javascript">
 
-    var size = 400;
+    var size = 800;
 
     // set up the canvass with a border
     var canvas = document.getElementById("canvas");
@@ -10,27 +12,36 @@
     ctx.rect(0, 0, size, size);
     ctx.stroke();
 
-    drawFractal(size / 2, size, size / 2);
+    //drawFractal(size / 2, size, size / 2);
 
-    function drawFractal(start_x, start_y, length) {
+    function drawFractal(start_x, start_y) {
 
       ctx.beginPath();
-      ctx.moveTo(start_x, start_y);
-      ctx.lineTo(start_x, length);
 
-     // ctx.lineTo(start_x / 2, length / 2);
+      ctx.moveTo(start_x, start_y);
+      console.log("move to:", start_x, start_y);
+
+      ctx.lineTo(start_x, start_y / 2);
+      console.log("line to:", start_x, start_y /2);
+
+      ctx.lineTo(start_x / 2, start_y / 4);
+      console.log("line to:", start_x / 2, start_y / 4);
 
       //move back to the junction
-      //ctx.moveTo(start_x, length);
-      //ctx.lineTo(start_x + start_x / 2, length / 2);
+      ctx.moveTo(start_x, start_y / 2);
+      console.log("move to:", start_x, start_y / 2);
+
+      ctx.lineTo(start_x + start_x / 2, start_y / 4);
+      console.log("line to:", start_x + start_x / 2, start_y / 4)
 
       ctx.stroke();
 
-      if (length > 2) {
-        drawFractal(start_x / 2, length / 2, length / 2);
-       // drawFractal(start_x + start_x / 2, length / 2, length / 2);
+      if (start_y > 2) {
+        drawFractal(start_x / 2, start_y / 4);
+        drawFractal(start_x + start_x / 2, start_y / 4);
+        console.log("recursing to:", start_x + start_x / 2, start_y / 4)
       }
-      
+
     }
   </script>
 </html>
